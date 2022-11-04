@@ -2,20 +2,14 @@ package Cofrinho;
 
 public abstract class Moeda {
 
-	double valor;
-	
-	
+	double valor;	
 	
 	public Moeda(double valor) {
 		super();
 		this.valor = valor;
 	}
 
-	void info() {
-		
-	}
+	abstract double info();
 	
-	void converter() {
-		
-	}
+	abstract double converter();
 }
