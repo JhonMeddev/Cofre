@@ -4,65 +4,56 @@ import java.util.Scanner;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Main {
+		
+		public static void main(String[] args) {
 
-	public static void main(String[] args) {
-		
-		Scanner input = new Scanner(System.in);
-		int menu;
-		
-		Cofrinho cofre = new Cofrinho();
-		
-		System.out.println("Menu Cofrinho");
-		System.out.println("1- Adicionar");
-		System.out.println("2- Remover");
-		System.out.println("3-Listar");
-		System.out.println("4-Encerrar");
-		menu=input.nextInt();
-		
-		while(menu != 4) {
+			Cofrinho cofrinho = new Cofrinho();
 			
-			switch (menu) {
-			case 1: 
-				int tipoMoeda=0;
-				while(tipoMoeda > 3 || tipoMoeda <=0) {
-					System.out.println("1- Real");
-					System.out.println("2- Dolar");
-					System.out.println("3- Euro");
-					tipoMoeda = input.nextInt();
-				}
-				System.out.println("Qual Valor ?");
-				double valor = input.nextDouble();
+			
+		    Scanner input = new Scanner(System.in);
+		    
+		    //Menu 
+		    int opcao;
+
+            System.out.println("Menu cofrinho:");
+            System.out.println("1 - Adicionar Moeda");
+            System.out.println("2 - Remover uma Moeda");
+            System.out.println("3 - Listar moedas");
+            System.out.println("4 - Total em Reais");
+            System.out.println("5 - Encerrar");
+
+		        opcao = input.nextInt();
+
+		        while(opcao != 5){
+		            switch(opcao){
+		                case 1:
+		                    cofrinho.adicionarMoeda();
+		                    break;
+		                case 2:
+		                    cofrinho.removerMoeda();
+		                    break;
+		                case 3:
+		                    cofrinho.listaMoedas();
+		                    break;
+		                case 4:
+		                    cofrinho.valorTotal();
+		                    break;
+		                default:
+		                    System.out.println("Opção inválida!");
+		            }
+
+		            System.out.println("Menu cofrinho:");
+		            System.out.println("1 - Adicionar Moeda");
+		            System.out.println("2 - Remover uma Moeda");
+		            System.out.println("3 - Listar moedas");
+		            System.out.println("4 - Total em Reais");
+		            System.out.println("5 - Encerrar");
+
+		            opcao = input.nextInt();
+		        }
+		        input.close();
 				
-				Moeda moeda = null;
-				if(tipoMoeda==1){
-					moeda = new Real(valor);
-				}
-				else if(tipoMoeda==2){
-					moeda = new Dolar(valor);
-				}
-				else if(tipoMoeda==3){
-					moeda = new Euro(valor);
-				}
-				cofre.adicionar(moeda);
-				break;
-			case 2: 
-				//remover
-				break;
-			case 3: 
-				cofre.listar();
-				break;
-			default:
-				System.out.println("Opção Invalida");
-				
+
 			}
-			
-			System.out.println("Menu Cofrinho");
-			System.out.println("1- Adicionar");
-			System.out.println("2- Remover");
-			System.out.println("3-Listar");
-			System.out.println("4-Encerrar");
-			menu=input.nextInt();
-		}
-	}
 
 }

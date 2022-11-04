@@ -6,24 +6,68 @@ import java.util.Scanner;
 
 public class Cofrinho {
 	
-	private ArrayList<Moeda> listaMoedas = new ArrayList<Moeda>();
+	ArrayList<Moeda> lista = new ArrayList<Moeda>();
+	Scanner input = new Scanner(System.in);
 	
-	public void adicionar (Moeda moeda) {
-		listaMoedas.add(moeda);
-	}
+	int menu = 0;
+	double valor = 0.0;
 	
-	public void remover (Moeda moeda) {
-		listaMoedas.remove(moeda);
-	}
+	public void adicionarMoeda() {
+		System.out.println("Qual moeda deseja adicionar: \n1 - Real\n2 - Dolar\n3 - Euro");
+		menu = input.nextInt();
+		System.out.println("Qual valor: ");
+		valor = input.nextDouble();
+		switch (menu) {
+			case 1: 
+				lista.add(new Real(valor));
+				break;
+			case 2:
+				lista.add(new Dolar(valor));
+				break;
+			case 3:
+				lista.add(new Euro(valor));
+				break;
+			default:
+				System.out.println("Opção inválida !");
+			}
+				
+		}
 
-	public void listar () {
-		
-		for (Moeda m : listaMoedas) {
-			System.out.println(m.toString());
+	
+	public void removerMoeda() {
+		System.out.println("Qual moeda deseja remover ? \n1 - Real\n2 - Dolar\n3 - Euro");
+		menu = input.nextInt();
+		System.out.println("Qual valor: ");
+		valor = input.nextDouble();
+		switch (menu) {
+			case 1: 
+				lista.remove(new Real(valor));
+				break;
+			case 2:
+				lista.remove(new Dolar(valor));
+				break;
+			case 3:
+				lista.remove(new Euro(valor));
+				break;
+			default:
+				System.out.println("Opção inválida!");
 		}
 	}
 	
-	public double totalConvertido() {
-		return 0;		
+	public void listaMoedas() {
+		for(Moeda m : lista) {
+			m.info();
+		}
+	}
+	
+
+	public void valorTotal() {		
+		double total = 0;
+		for(Moeda m : lista) {
+			
+			total += m.converter();
+		}
+		System.out.println("Total em reais R$: " + total);
+		 
 	}
 }
